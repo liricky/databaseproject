@@ -7,8 +7,8 @@ export default new Router({
   routes: [
     {
       path: '',
-      // redirect: {name: 'login'}
-      redirect: {name: 'selectcourse'}
+      redirect: {name: 'login'}
+      // redirect: {name: 'selectcourse'}
     },
     {
       path: '/login',
