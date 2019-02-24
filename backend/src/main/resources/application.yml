@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: Lee0430Lrq
+    url: jdbc:mysql://47.101.187.15:3306/databaseproject?characterEncoding=utf-8&useSSL=false
+
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: cn.liricky.database.model.entity
