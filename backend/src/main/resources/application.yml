@@ -5,6 +5,10 @@ spring:
     password: Lee0430Lrq
     url: jdbc:mysql://47.101.187.15:3306/databaseproject?characterEncoding=utf-8&useSSL=false
 
+server:
+  servlet:
+    context-path: /api
+  port: 8081
 
 mybatis:
   mapper-locations: classpath:mapping/*.xml

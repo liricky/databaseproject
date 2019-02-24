@@ -16,10 +16,13 @@
           &nbsp;&nbsp;&nbsp;&nbsp;
           <Button class="Button" type="primary" @click="cancel"><h3>退 课</h3></Button>
           <font size="5"> </font>
+          <br>
+          <font size="4" v-if="status2 === 'success'">选课成功！</font>
+          <font size="4" v-if="status3 === 'success'">退课成功！</font>
         </div>
         <br>
         <div class="bottombody">
-          <Row class="cardbox" style="background:#eee;padding:20px">
+          <Row class="cardbox" style="background:#eee;padding:20px" v-if="status1 === 'success'">
             <div class="box">
               <font size="4">课程号</font>
             </div>
@@ -93,30 +96,109 @@
 </style>
 <script>
 import tophead from '@/components/Head'
+import axios from 'axios'
 
 export default {
   data () {
     return {
-      lessons: [
-        {
-          classid: 12345678,
-          classname: '数据库',
-          teachername: '李晓强',
-          credit: 4,
-          department: '计算机学院'
-        },
-        {
-          classid: 12345678,
-          classname: '数据库',
-          teachername: '李晓强',
-          credit: 4,
-          department: '计算机学院'
-        }
-      ],
+      classId: '',
+      teacherId: '',
+      // lessons: [
+      //   {
+      //     classid: 12345678,
+      //     classname: '数据库',
+      //     teachername: '李晓强',
+      //     credit: 4,
+      //     department: '计算机学院'
+      //   },
+      //   {
+      //     classid: 12345678,
+      //     classname: '数据库',
+      //     teachername: '李晓强',
+      //     credit: 4,
+      //     department: '计算机学院'
+      //   }
+      // ],
+      lesson: [],
+      status1: '',
+      errormsg1: '',
+      status2: '',
+      errormsg2: '',
+      status3: '',
+      errormsg3: '',
     }
   },
   components: {
     tophead
+  },
+  method: {
+    searchclass(){
+      axios({
+        url: '/searchclass',
+        method: 'get',
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8',
+          'Authorization': this.$store.state.token
+        },
+        param: {
+          userId: this.$store.state.userId,
+          classId: this.classId,
+          teacherId: this.teacherId
+        }
+      }).then((response) => {
+        let res = response.data;
+        if(res.code === 200){
+          this.lessons = res.data;
+          this.status1 = 'success';
+        } else{
+          this.errormsg1 = res.message;
+        }
+      })
+    },
+    chooseclass(){
+      axios({
+        url: '/chooseclass',
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8',
+          'Authorization': this.$store.state.token
+        },
+        data: {
+          userId: this.$store.state.userId,
+          classId: this.classId,
+          teacherId: this.teacherId
+        }
+      }).then((response) => {
+        let res = response.data;
+        if(res.code === 200){
+          this.status2 = 'success';
+        } else{
+          this.errormsg2 = res.message;
+        }
+      })
+    },
+    cancelclass(){
+      axios({
+        url: '/cancelclass',
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8',
+          'Authorization': this.$store.state.token
+        },
+        data: {
+          userId: this.$store.state.userId,
+          classId: this.classId,
+          teacherId: this.teacherId
+        }
+      }).then((response) => {
+        let res = response.data;
+        if(res.code === 200){
+          this.status3 = 'success';
+        } else{
+          this.errormsg3 = res.message;
+        }
+      })
+    }
   }
 }
 </script>

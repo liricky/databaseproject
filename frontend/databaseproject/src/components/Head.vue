@@ -5,8 +5,7 @@
       <div id="loginbtn">
         <font size="4" v-if="$store.state.token" v-text="$store.state.userName" color="white"></font>
         &nbsp;&nbsp;
-        <Button type="primary" shape="circle" @click="jumpLogin" v-if="!$store.state.token">登录</Button>
-        <Button type="primary" shape="circle" @click="jumpLogout" v-if="$store.state.token">退出</Button>
+        <Button type="primary" shape="circle" @click="jumpLogout">退出</Button>
       </div>
     </div>
     <div id="navigation">
@@ -55,9 +54,6 @@ export default {
     }
   },
   methods: {
-    jumpLogin(){
-      this.$router.push({path: '/Login'});
-    },
     jumpLogout(){
         this.$store.commit('isLogout');
         this.$router.push({path: '/Login'});

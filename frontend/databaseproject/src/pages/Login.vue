@@ -91,19 +91,34 @@ export default {
           method: 'post'
         }).then((response) => {
           let res = response.data
-          if (res.status === 'success') {
+          if (res.code === 200) {
             this.errorTip = false
-            var _this = this
-            setTimeout(function () {
-              _this.$router.push({path: '/HomePage'})
-            }, 1000)
-            localStorage.setItem('token', res.data.token)
-            localStorage.setItem('userName', res.data.userName)
-            localStorage.setItem('userId', res.data.userId)
-            this.$store.commit('isLogin1', res.data.token)
-            this.$store.commit('isLogin2', res.data.userName)
-            this.$store.commit('isLogin3', res.data.userId)
-            this.$Message.info('登录成功！')
+            if(res.data.identity === 1) {
+              var _this = this
+              setTimeout(function () {
+                _this.$router.push({path: '/selectcourse'})
+              }, 1000)
+              localStorage.setItem('token', res.data.token)
+              localStorage.setItem('userName', res.data.userName)
+              localStorage.setItem('userId', res.data.userId)
+              localStorage.setItem('userAge', res.data.userAge)
+              localStorage.setItem('userSex', res.data.userSex)
+              localStorage.setItem('userDepartment', res.data.userDepartment)
+              this.$store.commit('isLogin1', res.data.token)
+              this.$store.commit('isLogin2', res.data.userName)
+              this.$store.commit('isLogin3', res.data.userId)
+              this.$store.commit('isLogin4', res.data.userAge)
+              this.$store.commit('isLogin5', res.data.userSex)
+              this.$store.commit('isLogin6', res.data.userDepartment)
+              this.$Message.info('登录成功！')
+            } else{
+              var _this = this
+              //  添加跳转到教师的界面
+              setTimeout(function () {
+                _this.$router.push({path: '/'})
+              }, 1000)
+              //  添加教师信息的前端缓存
+            }
           } else {
             this.errorTip = true
           }
