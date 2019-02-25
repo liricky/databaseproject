@@ -24,25 +24,6 @@
         </MenuItem>
       </Menu>
     </div>
-    <div class="studentdetail">
-      <div class="body">
-        <div class="box">
-          <font size="4">学号： {{this.$store.state.userId}}</font>
-        </div>
-        <div class="box">
-          <font size="4">姓名: {{this.$store.state.userName}}</font>
-        </div>
-        <div class="box">
-          <font size="4">年龄: {{this.$store.state.userAge}}</font>
-        </div>
-        <div class="box">
-          <font size="4">性别: {{this.$store.state.userSex}}</font>
-        </div>
-        <div>
-          <font size="4">所在学院: {{this.$store.state.userDepartment}}</font>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -86,14 +67,5 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  .body{
-    width: 80%;
-    margin: auto;
-  }
-  .box{
-    float: left;
-    width: 20%;
-    text-align: center;
   }
 </style>

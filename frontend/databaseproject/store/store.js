@@ -55,6 +55,18 @@ const store = new Vuex.Store({
     },
     getUserId (state) {
       return state.userId
+    },
+    getUserName (state) {
+      return state.userName
+    },
+    getUserAge (state) {
+      return state.userAge
+    },
+    getUserSex (state) {
+      return state.userSex
+    },
+    getUserDepartment (state) {
+      return state.userDepartment
     }
   }
 })

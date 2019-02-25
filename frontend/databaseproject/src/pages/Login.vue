@@ -17,8 +17,7 @@
         &nbsp;&nbsp;
         <br>
         <divider></divider>
-        <div class="error-show" v-show="errorTip"><h3>账号或密码错误</h3></div>
-        <div class="error-show" v-show="errorTip1"><h3>账号和密码不能为空</h3></div>
+        <div class="error-show"><h3 v-show="errorTip">账号或密码错误</h3><h3 v-show="errorTip1">账号和密码不能为空</h3></div>
         <Button class="loginButton" type="primary" @click="login"><h3>登 录</h3></Button>
       </div>
     </div>
@@ -59,6 +58,13 @@
     position: relative;
     background: url("./../assets/loginbackground.png") no-repeat;
   }
+  .error-show{
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    text-align: center;
+  }
 </style>
 <script>
 import axios from 'axios'
@@ -77,6 +83,7 @@ export default {
   methods: {
     login () {
       if (!this.userId || !this.userPwd) {
+        this.errorTip = false;
         this.errorTip1 = true
       } else {
         axios({
@@ -93,6 +100,7 @@ export default {
           let res = response.data
           if (res.code === 200) {
             this.errorTip = false
+            this.errorTip1 = false
             if(res.data.identity === 1) {
               var _this = this
               setTimeout(function () {
@@ -120,6 +128,7 @@ export default {
               //  添加教师信息的前端缓存
             }
           } else {
+            this.errorTip1 = false
             this.errorTip = true
           }
         })

@@ -5,6 +5,8 @@ import lombok.Data;
 
 @Data
 public class Class {
+    @JsonProperty("userId")
+    String userId;
     @JsonProperty("classId")
     Integer classid;
     @JsonProperty("teacherId")

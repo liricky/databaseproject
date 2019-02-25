@@ -19,6 +19,11 @@ export default new Router({
       path: '/selectcourse',
       name: 'selectcourse',
       component: () => import('@/pages/SelectCourse')
+    },
+    {
+      path: '/schedule',
+      name: 'schedule',
+      component: () => import('@/pages/Schedule')
     }
   ]
 })

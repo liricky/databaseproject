@@ -1,6 +1,25 @@
 <template>
     <div>
       <tophead></tophead>
+      <div class="studentdetail">
+        <div class="body1">
+          <div class="box">
+            <font size="4">学号： {{this.$store.state.userId}}</font>
+          </div>
+          <div class="box">
+            <font size="4">姓名: {{this.$store.state.userName}}</font>
+          </div>
+          <div class="box">
+            <font size="4">年龄: {{this.$store.state.userAge}}</font>
+          </div>
+          <div class="box">
+            <font size="4">性别: {{this.$store.state.userSex}}</font>
+          </div>
+          <div>
+            <font size="4">学院: {{this.$store.state.userDepartment}}</font>
+          </div>
+        </div>
+      </div>
       <div class="body">
         <divider></divider>
         <div class="topbody">
@@ -10,11 +29,11 @@
           <font size="4">&nbsp;&nbsp;教师号：</font>
           <Input v-model="teacherId" placeholder="请输入教师号" style="width: 300px" />
           <br>
-          <Button class="Button" type="primary" @click="search"><h3>搜 索</h3></Button>
+          <Button class="Button" type="primary" @click="searchclass"><h3>搜 索</h3></Button>
           &nbsp;&nbsp;&nbsp;&nbsp;
-          <Button class="Button" type="primary" @click="select"><h3>选 课</h3></Button>
+          <Button class="Button" type="primary" @click="chooseclass"><h3>选 课</h3></Button>
           &nbsp;&nbsp;&nbsp;&nbsp;
-          <Button class="Button" type="primary" @click="cancel"><h3>退 课</h3></Button>
+          <Button class="Button" type="primary" @click="cancelclass"><h3>退 课</h3></Button>
           <font size="5"> </font>
           <br>
           <font size="4" v-if="status2 === 'success'">选课成功！</font>
@@ -30,7 +49,7 @@
               <font size="4">课程名称</font>
             </div>
             <div class="box">
-              <font size="4">教师号</font>
+              <font size="4">教师名称</font>
             </div>
             <div class="box">
               <font size="4">学分</font>
@@ -67,6 +86,15 @@
   .body{
     width: 80%;
     margin: auto;
+  }
+  .body1{
+    width: 85%;
+    margin: auto;
+  }
+  .box{
+    float: left;
+    width: 20%;
+    text-align: center;
   }
   .topbody{
     background: #42e1ff;
@@ -119,7 +147,7 @@ export default {
       //     department: '计算机学院'
       //   }
       // ],
-      lesson: [],
+      lessons: [],
       status1: '',
       errormsg1: '',
       status2: '',
@@ -131,7 +159,7 @@ export default {
   components: {
     tophead
   },
-  method: {
+  methods: {
     searchclass(){
       axios({
         url: '/searchclass',
@@ -140,7 +168,7 @@ export default {
           'Content-Type': 'application/json;charset=UTF-8',
           'Authorization': this.$store.state.token
         },
-        param: {
+        params: {
           userId: this.$store.state.userId,
           classId: this.classId,
           teacherId: this.teacherId
@@ -148,10 +176,14 @@ export default {
       }).then((response) => {
         let res = response.data;
         if(res.code === 200){
-          this.lessons = res.data;
+          this.$set(this,'lessons',res.data);
           this.status1 = 'success';
+          this.status2 = '';
+          this.status3 = '';
+          this.$Message.info('搜索成功');
         } else{
           this.errormsg1 = res.message;
+          this.$Message.info('搜索失败');
         }
       })
     },
@@ -172,8 +204,12 @@ export default {
         let res = response.data;
         if(res.code === 200){
           this.status2 = 'success';
+          this.status1 = '';
+          this.status3 = '';
+          this.$Message.info('选课成功')
         } else{
           this.errormsg2 = res.message;
+          this.$Message.info('选课失败');
         }
       })
     },
@@ -194,8 +230,12 @@ export default {
         let res = response.data;
         if(res.code === 200){
           this.status3 = 'success';
+          this.status1 = '';
+          this.status2 = '';
+          this.$Message.info('退课成功');
         } else{
           this.errormsg3 = res.message;
+          this.$Message.info('退课失败');
         }
       })
     }
