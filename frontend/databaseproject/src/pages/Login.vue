@@ -9,11 +9,11 @@
         <h1 class="title">登录</h1>
         <br>
         <font size="4">&nbsp;&nbsp;学号：</font>
-        <Input v-model="userId" placeholder="请输入学号/工号" style="width: 300px" />
+        <Input v-model="userId" placeholder="请输入学号/工号" prefix="md-contact" style="width: 300px" />
         &nbsp;&nbsp;
         <br>
         <font size="4">&nbsp;&nbsp;密码：</font>
-        <Input v-model="userPwd" placeholder="请输入密码" style="width: 300px" type="password"/>
+        <Input v-model="userPwd" placeholder="请输入密码" prefix="md-key" style="width: 300px" type="password"/>
         &nbsp;&nbsp;
         <br>
         <divider></divider>
