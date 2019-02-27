@@ -58,7 +58,7 @@
               <font size="4">学院</font>
             </div>
             <br>
-            <Col class="cardcol" span="25" v-for="lesson in lessons">
+            <Col class="cardcol" span="25" v-for="lesson in lessons" :key="lesson.classId">
               <Card class="card" :bordered="true">
                 <div class="box">
                   <font size="2">{{lesson.classid}}</font>
@@ -149,11 +149,8 @@ export default {
       // ],
       lessons: [],
       status1: '',
-      errormsg1: '',
       status2: '',
-      errormsg2: '',
       status3: '',
-      errormsg3: '',
     }
   },
   components: {
@@ -161,83 +158,178 @@ export default {
   },
   methods: {
     searchclass(){
-      axios({
-        url: '/searchclass',
-        method: 'get',
-        headers: {
-          'Content-Type': 'application/json;charset=UTF-8',
-          'Authorization': this.$store.state.token
-        },
-        params: {
-          userId: this.$store.state.userId,
-          classId: this.classId,
-          teacherId: this.teacherId
-        }
-      }).then((response) => {
-        let res = response.data;
-        if(res.code === 200){
-          this.$set(this,'lessons',res.data);
-          this.status1 = 'success';
-          this.status2 = '';
-          this.status3 = '';
-          this.$Message.info('搜索成功');
+      if(this.classId === '' && this.teacherId === ''){
+        this.$Message.info('请输入课程号或教师号来查询课程');
+      } else {
+        if((this.isnumber(this.teacherId) || this.teacherId === '') && (this.classId === '' || this.isnumber(this.classId))) {
+          axios({
+            url: '/searchclass',
+            method: 'get',
+            headers: {
+              'Content-Type': 'application/json;charset=UTF-8',
+              'Authorization': this.$store.state.token
+            },
+            params: {
+              userId: this.$store.state.userId,
+              classId: this.classId || 1,
+              teacherId: this.teacherId || 'a'
+            }
+          }).then((response) => {
+            let res = response.data;
+            if (res.code === 200) {
+              this.$set(this, 'lessons', res.data);
+              this.status1 = 'success';
+              this.status2 = '';
+              this.status3 = '';
+              this.$Message.info('搜索成功');
+              this.classId = '';
+              this.teacherId = '';
+            } else {
+              if (res.message === '课程不存在') {
+                this.$Message.info('搜索的课程不存在');
+                this.teacherId = '';
+                this.classId = '';
+                this.status2 = '';
+                this.status1 = '';
+                this.status3 = '';
+              } else {
+                this.$Message.info('搜索失败');
+                this.teacherId = '';
+                this.classId = '';
+                this.status2 = '';
+                this.status1 = '';
+                this.status3 = '';
+              }
+            }
+          })
         } else{
-          this.errormsg1 = res.message;
-          this.$Message.info('搜索失败');
+          this.$Message.info('请输入符合类型要求的课程号或教师号来搜索课程');
+          this.classId = '';
+          this.teacherId = '';
+          this.status2 = '';
+          this.status1 = '';
+          this.status3 = '';
         }
-      })
+      }
     },
     chooseclass(){
-      axios({
-        url: '/chooseclass',
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json;charset=UTF-8',
-          'Authorization': this.$store.state.token
-        },
-        data: {
-          userId: this.$store.state.userId,
-          classId: this.classId,
-          teacherId: this.teacherId
-        }
-      }).then((response) => {
-        let res = response.data;
-        if(res.code === 200){
-          this.status2 = 'success';
+      if(this.classId === ''){
+        this.$Message.info("请输入课程号来完成选课");
+      } else {
+        if((this.isnumber(this.teacherId) || this.teacherId === '') && (this.classId === '' || this.isnumber(this.classId))) {
+          axios({
+            url: '/chooseclass',
+            method: 'post',
+            headers: {
+              'Content-Type': 'application/json;charset=UTF-8',
+              'Authorization': this.$store.state.token
+            },
+            data: {
+              userId: this.$store.state.userId,
+              classId: this.classId || 1,
+              teacherId: this.teacherId || 'a'
+            }
+          }).then((response) => {
+            let res = response.data;
+            if (res.code === 200) {
+              this.status2 = 'success';
+              this.status1 = '';
+              this.status3 = '';
+              this.$Message.info('选课成功');
+              this.classId = '';
+              this.teacherId = '';
+            } else {
+              if (res.message === '已经选择了该门课程') {
+                this.$Message.info(res.message);
+                this.teacherId = '';
+                this.classId = '';
+                this.status2 = '';
+                this.status1 = '';
+                this.status3 = '';
+              } else if (res.message === '选修的课程不存在') {
+                this.$Message.info(res.message);
+                this.teacherId = '';
+                this.classId = '';
+                this.status2 = '';
+                this.status1 = '';
+                this.status3 = '';
+              } else {
+                this.$Message.info('选课失败');
+                this.teacherId = '';
+                this.classId = '';
+                this.status2 = '';
+                this.status1 = '';
+                this.status3 = '';
+              }
+            }
+          })
+        } else{
+          this.$Message.info('请输入符合类型要求的课程号或教师号来选择课程');
+          this.classId = '';
+          this.teacherId = '';
+          this.status2 = '';
           this.status1 = '';
           this.status3 = '';
-          this.$Message.info('选课成功')
-        } else{
-          this.errormsg2 = res.message;
-          this.$Message.info('选课失败');
         }
-      })
+      }
     },
     cancelclass(){
-      axios({
-        url: '/cancelclass',
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json;charset=UTF-8',
-          'Authorization': this.$store.state.token
-        },
-        data: {
-          userId: this.$store.state.userId,
-          classId: this.classId,
-          teacherId: this.teacherId
-        }
-      }).then((response) => {
-        let res = response.data;
-        if(res.code === 200){
-          this.status3 = 'success';
-          this.status1 = '';
-          this.status2 = '';
-          this.$Message.info('退课成功');
+      if(this.classId === ''){
+        this.$Message.info("请输入课程号来完成退课");
+      } else {
+        if(this.teacherId === '' && (this.classId === '' || this.isnumber(this.classId))) {
+          axios({
+            url: '/cancelclass',
+            method: 'post',
+            headers: {
+              'Content-Type': 'application/json;charset=UTF-8',
+              'Authorization': this.$store.state.token
+            },
+            data: {
+              userId: this.$store.state.userId,
+              classId: this.classId || 1,
+              teacherId: this.teacherId || 'a'
+            }
+          }).then((response) => {
+            let res = response.data;
+            if (res.code === 200) {
+              this.status3 = 'success';
+              this.status1 = '';
+              this.status2 = '';
+              this.$Message.info('退课成功');
+              this.classId = '';
+              this.teacherId = '';
+            } else {
+              if (res.message === '该门课程尚未选修') {
+                this.$Message.info(res.message);
+                this.teacherId = '';
+                this.classId = '';
+                this.status2 = '';
+                this.status1 = '';
+                this.status3 = '';
+              } else {
+                this.$Message.info('退课失败');
+                this.teacherId = '';
+                this.classId = '';
+                this.status2 = '';
+                this.status1 = '';
+                this.status3 = '';
+              }
+            }
+          })
         } else{
-          this.errormsg3 = res.message;
-          this.$Message.info('退课失败');
+          this.$Message.info('请输入符合类型要求的课程号来退课');
+          this.classId = '';
+          this.teacherId = '';
+          this.status2 = '';
+          this.status1 = '';
+          this.status3 = '';
         }
-      })
+      }
+    },
+    isnumber(number){
+      var reg=/^\d{8}$/;
+      return reg.test(number);
     }
   }
 }

@@ -42,9 +42,9 @@ public class ClassController {
             return ResultTool.error(400,"参数数量不足");
         }
         ClassExample classExample = new ClassExample();
-        if(StringUtils.isEmpty(teacherId) && classId != null){
+        if(teacherId.equals("a") && classId != 1){
             classExample.createCriteria().andClassIdEqualTo(classId);
-        } else if(!StringUtils.isEmpty(teacherId) && classId == null){
+        } else if(!teacherId.equals("a") && classId == 1){
             classExample.createCriteria().andTeacherIdEqualTo(teacherId);
         } else {
             classExample.createCriteria().andClassIdEqualTo(classId).andTeacherIdEqualTo(teacherId);
@@ -74,14 +74,21 @@ public class ClassController {
             return ResultTool.error(400,"登录验证信息无效");
         }
         ClassExample classExample = new ClassExample();
-        if(StringUtils.isEmpty(class1.getTeacherId()) && class1.getClassid() != null){
+        StudentClassExample studentClassExample = new StudentClassExample();
+        if(class1.getTeacherId().equals("a") && class1.getClassid() != 1){
             classExample.createCriteria().andClassIdEqualTo(class1.getClassid());
-        } else if(!StringUtils.isEmpty(class1.getTeacherId()) && class1.getClassid() == null){
-            classExample.createCriteria().andTeacherIdEqualTo(class1.getTeacherId());
+            studentClassExample.createCriteria().andClassIdEqualTo(class1.getClassid());
+        } else if(!class1.getTeacherId().equals("a") && class1.getClassid() == 1){
+            return ResultTool.error(400,"参数信息无效");
         } else {
             classExample.createCriteria().andClassIdEqualTo(class1.getClassid()).andTeacherIdEqualTo(class1.getTeacherId());
+            studentClassExample.createCriteria().andClassIdEqualTo(class1.getClassid());
         }
         List<Class> classList = classMapper.selectByExample(classExample);
+        List<StudentClass> studentClassList = studentClassMapper.selectByExample(studentClassExample);
+        if(!studentClassList.isEmpty()){
+            return ResultTool.error(400,"已经选择了该门课程");
+        }
         if(classList.size() == 1){
             Class class2 = classMapper.selectByPrimaryKey(class1.getClassid());
             StudentClass studentClass = new StudentClass();
@@ -95,7 +102,7 @@ public class ClassController {
             }
             return ResultTool.success();
         } else{
-            return ResultTool.error(400,"请确定选择的条件正确");
+            return ResultTool.error(400,"选修的课程不存在");
         }
     }
 
@@ -107,19 +114,21 @@ public class ClassController {
             return ResultTool.error(400,"登录验证信息无效");
         }
         StudentClassExample studentClassExample = new StudentClassExample();
-        if(class1.getClassid() != null){
+        if(class1.getClassid() != 1){
             studentClassExample.createCriteria().andClassIdEqualTo(class1.getClassid());
         } else {
             return  ResultTool.error(400,"参数无效");
         }
         List<StudentClass> studentClassList = studentClassMapper.selectByExample(studentClassExample);
         if(studentClassList.size() == 1){
-        try{
-            studentClassMapper.deleteByExample(studentClassExample);
-        } catch(Exception e){
-            return ResultTool.error(405,"操作失败");
-        }
+            try{
+                studentClassMapper.deleteByExample(studentClassExample);
+            } catch(Exception e){
+                return ResultTool.error(405,"操作失败");
+            }
             return ResultTool.success();
+        } else if(studentClassList.isEmpty()){
+            return ResultTool.error(400,"该门课程尚未选修");
         } else{
             return ResultTool.error(400,"请确定选择的条件正确");
         }

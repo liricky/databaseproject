@@ -40,7 +40,7 @@
             <font size="4">学院</font>
           </div>
           <br>
-          <Col class="cardcol" span="25" v-for="lesson in lessons">
+          <Col class="cardcol" span="25" v-for="lesson in lessons" :key="lesson.classId">
             <Card class="card" :bordered="true">
               <div class="box">
                 <font size="2">{{lesson.classid}}</font>
