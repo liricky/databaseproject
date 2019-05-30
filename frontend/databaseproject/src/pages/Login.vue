@@ -114,7 +114,7 @@ export default {
           if (res.code === 200) {
             this.errorTip = false
             this.errorTip1 = false
-            if(res.data.identity === 2) {
+            if(res.identity === '2') {
               var _this = this
               setTimeout(function () {
                 _this.$router.push({path: '/selectcourse'})
@@ -127,17 +127,17 @@ export default {
               // this.$store.commit('isLogin6', res.data.userDepartment)
               this.$store.commit('setIdentity', res.data.identity)
               this.$Message.info('登录成功！')
-            } else if(res.data.identity === 1){
+            } else if(res.identity === '1'){
               var _this = this
               //  添加跳转到教师的界面
               setTimeout(function () {
-                _this.$router.push({path: '/'})
+                _this.$router.push({path: '/teacher'})
               }, 1000)
               //  添加教师信息的前端缓存
-            } else {
+            } else if(res.identity === '0') {
               var _this = this
               setTimeout(function () {
-                _this.$router.push({path: '/Manager'})
+                _this.$router.push({path: '/manager'})
               }, 1000)
               //  添加管理员信息的前端缓存
 

@@ -1,7 +1,7 @@
 <template>
   <div>
     <Head></Head>
-    <div class="main">
+    <div class="mamain">
       <Tabs value="tabs">
         <TabPane label="学生管理" name="student">
           <div>
@@ -494,7 +494,27 @@
     components: {
       Head
     },
+    created() {
+      this.getdata();
+    },
     methods: {
+      getdata() {
+        axios({
+          url: '/admin/student',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          method: 'get',
+        }).then((response) => {
+          let res = response.data
+          if (res.code === 200) {
+            console.log(res.data)
+            this.studentList = res.data;
+          } else {
+            this.$Message.warning('获取学生信息失败')
+          }
+        })
+      },
       changeStu(id) {
         this.stuModal = true;
         this.tempId = id;
@@ -573,7 +593,7 @@
 </script>
 
 <style>
-  .main{
+  .mamain{
     width: 80%;
     margin: 1% auto;
   }

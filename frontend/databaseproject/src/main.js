@@ -8,10 +8,12 @@ import 'iview/dist/styles/iview.css'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import store from './../store/store'
+import VueCookies from 'vue-cookies'
 
 Vue.config.productionTip = false
 Vue.use(iView)
 Vue.use(VueAxios, axios)
+Vue.use(VueCookies)
 
 axios.defaults.timeout = 5000
 axios.defaults.baseURL = 'http://localhost:8000/'
