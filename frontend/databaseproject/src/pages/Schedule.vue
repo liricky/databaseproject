@@ -3,21 +3,7 @@
       <tophead></tophead>
       <div class="studentdetail">
         <div class="body">
-          <div class="box">
-            <font size="4">学号： {{this.$store.state.userId}}</font>
-          </div>
-          <div class="box">
-            <font size="4">姓名: {{this.$store.state.userName}}</font>
-          </div>
-          <div class="box">
-            <font size="4">年龄: {{this.$store.state.userAge}}</font>
-          </div>
-          <div class="box">
-            <font size="4">性别: {{this.$store.state.userSex}}</font>
-          </div>
-          <div>
-            <font size="4">学院: {{this.$store.state.userDepartment}}</font>
-          </div>
+          <font size="4">姓名: {{this.$store.state.userName}}</font>
         </div>
       </div>
       <div class="schedule">
@@ -63,7 +49,7 @@
       </div>
     </div>
 </template>
-<style scoped>
+<style>
   .card{
     margin: auto;
     border: 1px solid black;
@@ -83,6 +69,11 @@
   .body{
     width: 85%;
     margin: auto;
+    text-align: center;
+  }
+
+  .studentdetail{
+    margin: 1% auto;
   }
   .box{
     float: left;
@@ -111,7 +102,7 @@
     methods: {
       getclass(){
         axios({
-          url: '/getclass',
+          url: '/student/getclass',
           method: 'get',
           headers: {
             'Content-Type': 'application/json;charset=UTF-8',

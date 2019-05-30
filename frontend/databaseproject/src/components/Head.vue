@@ -8,13 +8,13 @@
         <Button type="primary" shape="circle" @click="jumpLogout">退出</Button>
       </div>
     </div>
-    <div id="navigation">
+    <div id="navigation" v-if="this.$store.state.userIdentity === 2">
       <Menu id="menu" mode="horizontal" :theme="theme1" active-name="1" @on-select="routerTo">
         <MenuItem id="SelectCourse" name="/SelectCourse">
           <Icon type="ios-book" />
           学生选课
         </MenuItem>
-        <MenuItem id="ReportCard" name="/ReportCard">
+        <MenuItem id="Grade" name="/grade">
           <Icon type="ios-document" />
           学生成绩单
         </MenuItem>
@@ -28,6 +28,8 @@
 </template>
 
 <script>
+  import axios from 'axios'
+
 export default {
   data () {
     return {
@@ -36,9 +38,22 @@ export default {
   },
   methods: {
     jumpLogout(){
-        this.$store.commit('isLogout');
-        this.$router.push({path: '/Login'});
-        this.$Message.info("退出成功！");
+      axios({
+        url: '/logout',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        },
+        method: 'post'
+      }).then((response) => {
+        let res = response.data
+        if (res.code === 200) {
+          this.$router.push({path: '/Login'});
+          this.$store.commit('isLogout');
+          this.$Message.info("退出成功！");
+        } else {
+          this.$Message.warning("退出失败！");
+        }
+      })
     },
     routerTo(name){
       this.$router.push(name)
@@ -47,7 +62,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
   #loginbtn{
     position: absolute;
     right: 2%;

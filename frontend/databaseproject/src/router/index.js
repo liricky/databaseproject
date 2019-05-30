@@ -24,6 +24,21 @@ export default new Router({
       path: '/schedule',
       name: 'schedule',
       component: () => import('@/pages/Schedule')
-    }
+    },
+    {
+      path: '/grade',
+      name: 'grade',
+      component: () => import('@/pages/Grade')
+    },
+    {
+      path: '/manager',
+      name: 'manager',
+      component: () => import('@/pages/Manager')
+    },
+    {
+      path: '/teacher',
+      name: 'teacher',
+      component: () => import('@/pages/Teacher')
+    },
   ]
 })
