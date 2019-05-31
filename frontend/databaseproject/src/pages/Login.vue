@@ -116,9 +116,6 @@ export default {
             this.errorTip1 = false
             if(res.identity === '2') {
               var _this = this
-              setTimeout(function () {
-                _this.$router.push({path: '/selectcourse'})
-              }, 1000)
               this.$store.commit('isLogin1', res.data.token)
               this.$store.commit('isLogin2', res.data.userName)
               // this.$store.commit('isLogin3', res.data.userId)
@@ -126,7 +123,10 @@ export default {
               // this.$store.commit('isLogin5', res.data.userSex)
               // this.$store.commit('isLogin6', res.data.userDepartment)
               this.$store.commit('setIdentity', res.data.identity)
-              this.$Message.info('登录成功！')
+              this.$Message.success('登录成功！')
+              setTimeout(function () {
+                _this.$router.push({path: '/selectcourse'})
+              }, 1000)
             } else if(res.identity === '1'){
               var _this = this
               //  添加跳转到教师的界面

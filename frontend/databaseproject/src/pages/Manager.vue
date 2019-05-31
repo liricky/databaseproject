@@ -7,29 +7,29 @@
           <div>
             <Button type="primary" @click="showStuDrawer"><h3>添加学生</h3></Button>
             <Drawer width="70" title="创建新学生" :closable="false" v-model="stuDrawer">
-              <Form ref="stuForm" :model="stuForm" :label-width="80">
+              <Form ref="stuForm" :model="stuForm" :label-width="100">
                 <FormItem label="姓名" prop="name">
-                  <Input type="text" v-model="stuForm.name" style="width:200px"></Input>
+                  <Input type="text" v-model="stuForm.name" style="width:300px"></Input>
                 </FormItem>
                 <FormItem label="学院" prop="department">
-                  <Select v-model="stuForm.department" style="width:200px">
+                  <Select v-model="stuForm.department" style="width:300px">
                     <Option v-for="dep in departmentList" :key="dep.id" :value="dep.name">{{dep.name}}</Option>
                   </Select>
                 </FormItem>
                 <FormItem label="性别" prop="sex">
-                  <Select v-model="stuForm.sex" style="width:200px">
+                  <Select v-model="stuForm.sex" style="width:300px">
                     <Option :value="男">男</Option>
                     <Option :value="女">女</Option>
                   </Select>
                 </FormItem>
                 <FormItem label="逻辑删除状态" prop="sex">
-                  <Select v-model="stuForm.isDelete" style="width:200px">
+                  <Select v-model="stuForm.isDelete" style="width:300px">
                     <Option :value="true">逻辑删除</Option>
                     <Option :value="false">解除逻辑删除</Option>
                   </Select>
                 </FormItem>
                 <FormItem label="密码" prop="password">
-                  <Input type="password" v-model="stuForm.password" style="width:200px"></Input>
+                  <Input type="password" v-model="stuForm.password" style="width:300px"></Input>
                 </FormItem>
                 <FormItem>
                   <Button type="primary" @click="handleSubmit('stuForm')">创建</Button>
@@ -43,29 +43,29 @@
               title="修改学生信息"
               @on-ok="ok"
               @on-cancel="cancel">
-              <Form ref="stuForm" :model="stuForm" :label-width="80">
+              <Form ref="stuForm" :model="stuForm" :label-width="100">
                 <FormItem label="姓名" prop="name">
-                  <Input type="text" v-model="stuForm.name" style="width:200px"></Input>
+                  <Input type="text" v-model="stuForm.name" style="width:300px"></Input>
                 </FormItem>
                 <FormItem label="学院" prop="department">
-                  <Select v-model="stuForm.department" style="width:200px">
+                  <Select v-model="stuForm.department" style="width:300px">
                     <Option v-for="dep in departmentList" :key="dep.id" :value="dep.name">{{dep.name}}</Option>
                   </Select>
                 </FormItem>
                 <FormItem label="性别" prop="sex">
-                  <Select v-model="stuForm.sex" style="width:200px">
+                  <Select v-model="stuForm.sex" style="width:300px">
                     <Option :value="男">男</Option>
                     <Option :value="女">女</Option>
                   </Select>
                 </FormItem>
                 <FormItem label="逻辑删除状态" prop="sex">
-                  <Select v-model="stuForm.isDelete" style="width:200px">
+                  <Select v-model="stuForm.isDelete" style="width:300px">
                     <Option :value="true">逻辑删除</Option>
                     <Option :value="false">解除逻辑删除</Option>
                   </Select>
                 </FormItem>
                 <FormItem label="密码" prop="password">
-                  <Input type="password" v-model="stuForm.password" style="width:200px"></Input>
+                  <Input type="password" v-model="stuForm.password" style="width:300px"></Input>
                 </FormItem>
                 <FormItem>
                   <Button type="primary" @click="handleSubmit('stuForm')">修改</Button>
@@ -79,29 +79,29 @@
           <div>
             <Button type="primary" @click="showTeaDrawer"><h3>添加教师</h3></Button>
             <Drawer width="70" title="创建新教师" :closable="false" v-model="teaDrawer">
-              <Form ref="teaForm" :model="teaForm" :label-width="80">
+              <Form ref="teaForm" :model="teaForm" :label-width="100">
                 <FormItem label="姓名" prop="name">
-                  <Input type="text" v-model="teaForm.name" style="width:200px"></Input>
+                  <Input type="text" v-model="teaForm.name" style="width:300px"></Input>
                 </FormItem>
                 <FormItem label="学院" prop="department">
-                  <Select v-model="teaForm.department" style="width:200px">
+                  <Select v-model="teaForm.department" style="width:300px">
                     <Option v-for="dep in departmentList" :key="dep.id" :value="dep.name">{{dep.name}}</Option>
                   </Select>
                 </FormItem>
                 <FormItem label="性别" prop="sex">
-                  <Select v-model="teaForm.sex" style="width:200px">
+                  <Select v-model="teaForm.sex" style="width:300px">
                     <Option :value="男">男</Option>
                     <Option :value="女">女</Option>
                   </Select>
                 </FormItem>
                 <FormItem label="逻辑删除状态" prop="sex">
-                  <Select v-model="teaForm.isDelete" style="width:200px">
+                  <Select v-model="teaForm.isDelete" style="width:300px">
                     <Option :value="true">逻辑删除</Option>
                     <Option :value="false">解除逻辑删除</Option>
                   </Select>
                 </FormItem>
                 <FormItem label="密码" prop="password">
-                  <Input type="password" v-model="teaForm.password" style="width:200px"></Input>
+                  <Input type="password" v-model="teaForm.password" style="width:300px"></Input>
                 </FormItem>
                 <FormItem>
                   <Button type="primary" @click="handleSubmit('teaForm')">创建</Button>
@@ -115,29 +115,29 @@
               title="修改教师信息"
               @on-ok="ok"
               @on-cancel="cancel">
-              <Form ref="teaForm" :model="teaForm" :label-width="80">
+              <Form ref="teaForm" :model="teaForm" :label-width="100">
                 <FormItem label="姓名" prop="name">
-                  <Input type="text" v-model="teaForm.name" style="width:200px"></Input>
+                  <Input type="text" v-model="teaForm.name" style="width:300px"></Input>
                 </FormItem>
                 <FormItem label="学院" prop="department">
-                  <Select v-model="teaForm.department" style="width:200px">
+                  <Select v-model="teaForm.department" style="width:300px">
                     <Option v-for="dep in departmentList" :key="dep.id" :value="dep.name">{{dep.name}}</Option>
                   </Select>
                 </FormItem>
                 <FormItem label="性别" prop="sex">
-                  <Select v-model="teaForm.sex" style="width:200px">
+                  <Select v-model="teaForm.sex" style="width:300px">
                     <Option :value="男">男</Option>
                     <Option :value="女">女</Option>
                   </Select>
                 </FormItem>
                 <FormItem label="逻辑删除状态" prop="sex">
-                  <Select v-model="teaForm.isDelete" style="width:200px">
+                  <Select v-model="teaForm.isDelete" style="width:300px">
                     <Option :value="true">逻辑删除</Option>
                     <Option :value="false">解除逻辑删除</Option>
                   </Select>
                 </FormItem>
                 <FormItem label="密码" prop="password">
-                  <Input type="password" v-model="teaForm.password" style="width:200px"></Input>
+                  <Input type="password" v-model="teaForm.password" style="width:300px"></Input>
                 </FormItem>
                 <FormItem>
                   <Button type="primary" @click="handleSubmit('teaForm')">修改</Button>
@@ -151,12 +151,12 @@
           <div>
             <Button type="primary" @click="showDepDrawer"><h3>添加学院</h3></Button>
             <Drawer width="70" title="创建新学院" :closable="false" v-model="depDrawer">
-              <Form ref="depForm" :model="depForm" :label-width="80">
+              <Form ref="depForm" :model="depForm" :label-width="100">
                 <FormItem label="姓名" prop="name">
-                  <Input type="text" v-model="depForm.name" style="width:200px"></Input>
+                  <Input type="text" v-model="depForm.name" style="width:300px"></Input>
                 </FormItem>
                 <FormItem label="逻辑删除状态" prop="sex">
-                  <Select v-model="depForm.isDelete" style="width:200px">
+                  <Select v-model="depForm.isDelete" style="width:300px">
                     <Option :value="true">逻辑删除</Option>
                     <Option :value="false">解除逻辑删除</Option>
                   </Select>
@@ -173,12 +173,12 @@
               title="修改学院信息"
               @on-ok="ok"
               @on-cancel="cancel">
-              <Form ref="teaForm" :model="depForm" :label-width="80">
+              <Form ref="teaForm" :model="depForm" :label-width="100">
                 <FormItem label="学院名称" prop="name">
-                  <Input type="text" v-model="depForm.name" style="width:200px"></Input>
+                  <Input type="text" v-model="depForm.name" style="width:300px"></Input>
                 </FormItem>
                 <FormItem label="逻辑删除状态" prop="sex">
-                  <Select v-model="depForm.isDelete" style="width:200px">
+                  <Select v-model="depForm.isDelete" style="width:300px">
                     <Option :value="true">逻辑删除</Option>
                     <Option :value="false">解除逻辑删除</Option>
                   </Select>
@@ -195,26 +195,26 @@
           <div>
             <Button type="primary" @click="showCouDrawer"><h3>添加课程</h3></Button>
             <Drawer width="70" title="创建新课程" :closable="false" v-model="couDrawer">
-              <Form ref="couForm" :model="couForm" :label-width="80">
+              <Form ref="couForm" :model="couForm" :label-width="100">
                 <FormItem label="课程名称" prop="name">
-                  <Input type="text" v-model="couForm.name" style="width:200px"></Input>
+                  <Input type="text" v-model="couForm.name" style="width:300px"></Input>
                 </FormItem>
                 <FormItem label="学院" prop="department">
-                  <Select v-model="couForm.department" style="width:200px">
+                  <Select v-model="couForm.department" style="width:300px">
                     <Option v-for="dep in departmentList" :key="dep.id" :value="dep.name">{{dep.name}}</Option>
                   </Select>
                 </FormItem>
                 <FormItem label="学分" prop="credit">
-                  <Input type="text" v-model="couForm.credit" style="width:200px"></Input>
+                  <Input type="text" v-model="couForm.credit" style="width:300px"></Input>
                 </FormItem>
                 <FormItem label="逻辑删除状态" prop="sex">
-                  <Select v-model="couForm.isDelete" style="width:200px">
+                  <Select v-model="couForm.isDelete" style="width:300px">
                     <Option :value="true">逻辑删除</Option>
                     <Option :value="false">解除逻辑删除</Option>
                   </Select>
                 </FormItem>
                 <FormItem label="成绩比例" prop="ratio">
-                  <Input type="text" v-model="couForm.ratio" style="width:200px"></Input>
+                  <Input type="text" v-model="couForm.ratio" style="width:300px"></Input>
                 </FormItem>
                 <FormItem>
                   <Button type="primary" @click="handleSubmit('couForm')">创建</Button>
@@ -228,26 +228,26 @@
               title="更新课程信息"
               @on-ok="ok"
               @on-cancel="cancel">
-              <Form ref="couForm" :model="couForm" :label-width="80">
+              <Form ref="couForm" :model="couForm" :label-width="100">
                 <FormItem label="课程名称" prop="name">
-                  <Input type="text" v-model="couForm.name" style="width:200px"></Input>
+                  <Input type="text" v-model="couForm.name" style="width:300px"></Input>
                 </FormItem>
                 <FormItem label="学院" prop="department">
-                  <Select v-model="couForm.department" style="width:200px">
+                  <Select v-model="couForm.department" style="width:300px">
                     <Option v-for="dep in departmentList" :key="dep.id" :value="dep.name">{{dep.name}}</Option>
                   </Select>
                 </FormItem>
                 <FormItem label="学分" prop="credit">
-                  <Input type="text" v-model="couForm.credit" style="width:200px"></Input>
+                  <Input type="text" v-model="couForm.credit" style="width:300px"></Input>
                 </FormItem>
                 <FormItem label="逻辑删除状态" prop="sex">
-                  <Select v-model="couForm.isDelete" style="width:200px">
+                  <Select v-model="couForm.isDelete" style="width:300px">
                     <Option :value="true">逻辑删除</Option>
                     <Option :value="false">解除逻辑删除</Option>
                   </Select>
                 </FormItem>
                 <FormItem label="成绩比例" prop="ratio">
-                  <Input type="text" v-model="couForm.ratio" style="width:200px"></Input>
+                  <Input type="text" v-model="couForm.ratio" style="width:300px"></Input>
                 </FormItem>
                 <FormItem>
                   <Button type="primary" @click="handleSubmit('couForm')">创建</Button>
@@ -332,7 +332,7 @@
             key: 'isDelete'
           },
           {
-            title: 'Action',
+            title: '操作',
             key: 'action',
             align: 'center',
             render: (h, params) => {
@@ -380,7 +380,7 @@
             key: 'isDelete'
           },
           {
-            title: 'Action',
+            title: '操作',
             key: 'action',
             align: 'center',
             render: (h, params) => {
@@ -405,6 +405,7 @@
           {
             title: '学院名称',
             key: 'name',
+            align: 'center',
             render: (h, params) => {
               return h('div', [
                 h('strong', params.row.name)
@@ -413,10 +414,11 @@
           },
           {
             title: '逻辑删除状态',
-            key: 'isDelete'
+            key: 'isDelete',
+            align: 'center',
           },
           {
-            title: 'Action',
+            title: '操作',
             key: 'action',
             align: 'center',
             render: (h, params) => {
@@ -424,8 +426,6 @@
                 h('Button', {
                   props: {
                     type: 'primary',
-                  },
-                  style: {
                   },
                   on: {
                     click: () => {
@@ -468,7 +468,7 @@
             key: 'ratio'
           },
           {
-            title: 'Action',
+            title: '操作',
             key: 'action',
             align: 'center',
             render: (h, params) => {
@@ -499,8 +499,39 @@
     },
     methods: {
       getdata() {
+
+        // axios({
+        //   url: '/admin/student',
+        //   headers: {
+        //     'Content-Type': 'application/json'
+        //   },
+        //   method: 'get',
+        // }).then((response) => {
+        //   let res = response.data
+        //   if (res.code === 200) {
+        //     console.log(res.data)
+        //     this.studentList = res.data;
+        //   } else {
+        //     this.$Message.warning('获取学生信息失败')
+        //   }
+        // });
+        // axios({
+        //   url: '/admin/teacher',
+        //   headers: {
+        //     'Content-Type': 'application/json'
+        //   },
+        //   method: 'get',
+        // }).then((response) => {
+        //   let res = response.data
+        //   if (res.code === 200) {
+        //     console.log(res.data)
+        //     this.teacherList = res.data;
+        //   } else {
+        //     this.$Message.warning('获取教师信息失败')
+        //   }
+        // });
         axios({
-          url: '/admin/student',
+          url: '/admin/department',
           headers: {
             'Content-Type': 'application/json'
           },
@@ -508,12 +539,27 @@
         }).then((response) => {
           let res = response.data
           if (res.code === 200) {
-            console.log(res.data)
-            this.studentList = res.data;
+            this.departmentList = res.data;
+            console.log(typeof this.departmentList)
           } else {
-            this.$Message.warning('获取学生信息失败')
+            this.$Message.warning('获取院系信息失败')
           }
-        })
+        });
+        // axios({
+        //   url: '/admin/course',
+        //   headers: {
+        //     'Content-Type': 'application/json'
+        //   },
+        //   method: 'get',
+        // }).then((response) => {
+        //   let res = response.data
+        //   if (res.code === 200) {
+        //     console.log(res.data)
+        //     this.courseList = res.data;
+        //   } else {
+        //     this.$Message.warning('获取课程信息失败')
+        //   }
+        // })
       },
       changeStu(id) {
         this.stuModal = true;

@@ -5,7 +5,7 @@
       <Tabs value="tabs">
         <TabPane label="成绩管理" name="score">
           <div>
-            <Select v-model="classModel" style="width:200px">
+            <Select v-model="classModel" style="width:300px">
               <Option v-for="classes in classList" :value="classes.name" :key="classes.id">{{classes.name}}</Option>
             </Select>
 
